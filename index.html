@@ -1,0 +1,3201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<title>For My Favourite Person</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Shadows+Into+Light&display=swap" rel="stylesheet">
+<audio id="music" src="song.mp3" loop autoplay></audio>
+<style>
+
+:root{
+    --mar:#6b0f2a;
+    --mar2:#4a0a1c;
+    --rose:#a3243f;
+    --bei:#f3e6d2;
+    --bei2:#e6d2b5;
+    --gold:#b88a4a;
+    --ink:#3a0d19;
+}
+
+*{
+    box-sizing:border-box;
+}
+
+html,
+body{
+    height:100%;
+    margin:0;
+}
+
+body{
+    background:
+        radial-gradient(
+            circle at 50% 30%,
+            #7d1632,
+            var(--mar2) 75%
+        );
+
+    font-family:
+        'Cormorant Garamond',
+        Georgia,
+        serif;
+
+    color:var(--ink);
+    overflow:hidden;
+}
+
+
+/* =====================================================
+   FLOATING HEARTS
+===================================================== */
+
+.fl{
+    position:fixed;
+    top:105vh;
+    color:var(--bei);
+    opacity:.18;
+    animation:rise linear forwards;
+    pointer-events:none;
+}
+
+@keyframes rise{
+    to{
+        transform:
+            translateY(-120vh)
+            rotate(25deg);
+    }
+}
+
+
+/* =====================================================
+   ENVELOPE SCENE
+===================================================== */
+
+.scene{
+    height:100%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:34px;
+    perspective:1200px;
+}
+
+.hint{
+    color:var(--bei);
+    font-style:italic;
+    font-size:1.25rem;
+    letter-spacing:.04em;
+    animation:pulse 2s infinite;
+}
+
+@keyframes pulse{
+    50%{
+        opacity:.45;
+    }
+}
+
+
+/* =====================================================
+   ENVELOPE
+===================================================== */
+
+.env{
+    --w:min(88vw,400px);
+
+    width:var(--w);
+    height:calc(var(--w)*.68);
+
+    position:relative;
+    cursor:pointer;
+
+    transition:
+        transform .8s,
+        opacity .8s;
+
+    filter:
+        drop-shadow(
+            0 25px 30px #0007
+        );
+}
+
+.env:focus-visible{
+    outline:
+        3px solid var(--gold);
+    outline-offset:8px;
+}
+
+.env>*{
+    position:absolute;
+    inset:0;
+}
+
+.back{
+    background:
+        linear-gradient(
+            #e2cba8,
+            #d3b98f
+        );
+
+    border-radius:6px;
+}
+
+.card{
+    inset:6% 7%;
+    background:var(--bei);
+    border-radius:4px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-family:'Great Vibes';
+    font-size:calc(var(--w)*.075);
+    color:var(--mar);
+    text-align:center;
+
+    transition:
+        transform 1s .6s
+        cubic-bezier(.3,.8,.3,1);
+
+    box-shadow:
+        0 0 0 1px #0002;
+
+    background-image:
+        repeating-linear-gradient(
+            transparent 0 23px,
+            #6b0f2a14 23px 24px
+        );
+}
+
+.front{
+    pointer-events:none;
+    border-radius:6px;
+}
+
+.front i{
+    position:absolute;
+    inset:0;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f5e9d6,
+            #e8d4b4
+        );
+}
+
+.front .l{
+    clip-path:
+        polygon(
+            0 0,
+            52% 52%,
+            0 100%
+        );
+}
+
+.front .r{
+    clip-path:
+        polygon(
+            100% 0,
+            48% 52%,
+            100% 100%
+        );
+
+    filter:brightness(.96);
+}
+
+.front .b{
+    clip-path:
+        polygon(
+            0 100%,
+            50% 40%,
+            100% 100%
+        );
+
+    background:
+        linear-gradient(
+            #f1e1c7,
+            #e2c9a2
+        );
+}
+
+
+/* =====================================================
+   ENVELOPE FLAP
+===================================================== */
+
+.flap{
+    z-index:3;
+    transform-origin:top;
+
+    transition:
+        transform .9s .25s
+        cubic-bezier(.5,0,.3,1),
+        z-index 0s .6s;
+
+    pointer-events:none;
+}
+
+.flap i{
+    position:absolute;
+    inset:0;
+
+    clip-path:
+        polygon(
+            0 0,
+            100% 0,
+            50% 62%
+        );
+
+    background:
+        linear-gradient(
+            #e9d6b6,
+            #d8bd92
+        );
+
+    backface-visibility:hidden;
+}
+
+.flap i+i{
+    transform:rotateX(180deg);
+    background:#c9ab7d;
+
+    clip-path:
+        polygon(
+            0 0,
+            100% 0,
+            50% 62%
+        );
+}
+
+
+/* =====================================================
+   SEAL / STAMP
+===================================================== */
+
+.seal{
+    position:absolute;
+
+    left:50%;
+    top:51%;
+
+    width:calc(var(--w)*.17);
+    aspect-ratio:1;
+
+    transform:
+        translate(-50%,-50%);
+
+    z-index:5;
+
+    transition:
+        transform .5s,
+        opacity .5s;
+
+    filter:
+        drop-shadow(
+            0 3px 3px #0006
+        );
+}
+
+.stamp{
+    position:absolute;
+
+    right:4.5%;
+    top:7%;
+
+    width:calc(var(--w)*.2);
+
+    z-index:6;
+    transform:rotate(4deg);
+
+    filter:
+        drop-shadow(
+            1px 2px 2px #0005
+        );
+
+    transition:opacity .4s;
+}
+
+.pm{
+    position:absolute;
+
+    right:15%;
+    top:5%;
+
+    width:calc(var(--w)*.22);
+
+    z-index:7;
+    opacity:.55;
+
+    transform:rotate(-12deg);
+
+    transition:opacity .4s;
+}
+
+.addr{
+    position:absolute;
+
+    left:8%;
+    bottom:11%;
+
+    z-index:6;
+
+    font-family:'Great Vibes';
+    font-size:calc(var(--w)*.065);
+
+    color:var(--mar);
+    line-height:1.15;
+}
+
+.ebow{
+    position:absolute;
+
+    left:3%;
+    bottom:2%;
+
+    width:calc(var(--w)*.2);
+
+    z-index:6;
+    transform:rotate(-14deg);
+}
+
+
+/* =====================================================
+   ENVELOPE OPEN ANIMATION
+===================================================== */
+
+.env.open .flap{
+    transform:rotateX(180deg);
+    z-index:1;
+}
+
+.env.open .seal,
+.env.open .stamp,
+.env.open .pm,
+.env.open .addr,
+.env.open .ebow{
+    opacity:0;
+}
+
+.env.open .seal{
+    transform:
+        translate(-50%,-80%)
+        scale(1.3)
+        rotate(20deg);
+}
+
+.env.open .card{
+    transform:
+        translateY(-62%);
+}
+
+.env.gone{
+    transform:
+        translateY(60px)
+        scale(.9);
+
+    opacity:0;
+    pointer-events:none;
+}
+
+
+/* =====================================================
+   LETTER
+===================================================== */
+
+#letter{
+    position:fixed;
+    inset:0;
+
+    overflow:auto;
+
+    background:
+        radial-gradient(
+            circle at 50% 0,
+            #7d1632,
+            var(--mar2)
+        );
+
+    padding:
+        calc(
+            20px +
+            env(safe-area-inset-top,0px)
+        )
+        14px
+        40px;
+
+    opacity:0;
+    visibility:hidden;
+
+    transition:opacity .9s;
+
+    -webkit-overflow-scrolling:touch;
+}
+
+#letter.show{
+    opacity:1;
+    visibility:visible;
+}
+
+.paper{
+    max-width:760px;
+    margin:0 auto;
+
+    background:var(--bei);
+
+    border-radius:6px;
+
+    padding:
+        56px
+        clamp(18px,6vw,60px)
+        46px;
+
+    position:relative;
+
+    box-shadow:
+        0 30px 60px #0008,
+        inset 0 0 0 10px var(--bei),
+        inset 0 0 0 11px #b88a4a88;
+
+    transform:
+        translateY(40px)
+        scale(.96);
+
+    transition:
+        transform 1.1s .2s
+        cubic-bezier(.2,.9,.2,1);
+
+    background-image:
+        radial-gradient(
+            #6b0f2a0d 1px,
+            transparent 1px
+        );
+
+    background-size:14px 14px;
+}
+
+#letter.show .paper{
+    transform:none;
+}
+
+.tbow{
+    position:absolute;
+
+    left:50%;
+    top:-34px;
+
+    width:120px;
+
+    transform:
+        translateX(-50%);
+
+    filter:
+        drop-shadow(
+            0 4px 4px #0005
+        );
+}
+
+
+/* =====================================================
+   LETTER TEXT
+===================================================== */
+
+h1{
+    font-family:'Great Vibes';
+    font-weight:400;
+
+    font-size:
+        clamp(
+            2.6rem,
+            10vw,
+            4.6rem
+        );
+
+    color:var(--mar);
+
+    text-align:center;
+
+    margin:
+        14px 0 4px;
+
+    line-height:1.05;
+}
+
+.sub{
+    text-align:center;
+    font-style:italic;
+
+    font-size:1.2rem;
+
+    color:var(--rose);
+
+    margin:
+        0 0 26px;
+}
+
+.sep{
+    display:flex;
+    align-items:center;
+
+    gap:12px;
+
+    color:var(--rose);
+
+    margin:26px 0;
+}
+
+.sep:before,
+.sep:after{
+    content:"";
+    flex:1;
+    height:1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            var(--gold),
+            transparent
+        );
+}
+
+.sep svg{
+    width:20px;
+}
+
+[contenteditable]{
+    outline:none;
+    border-radius:4px;
+    transition:background .2s;
+}
+
+[contenteditable]:hover,
+[contenteditable]:focus{
+    background:#6b0f2a12;
+}
+
+.msg{
+    font-size:1.32rem;
+    line-height:1.7;
+
+    text-align:center;
+
+    max-width:56ch;
+
+    margin:0 auto;
+}
+
+h2{
+    font-family:'Great Vibes';
+    font-weight:400;
+
+    font-size:2.3rem;
+
+    color:var(--mar);
+
+    text-align:center;
+
+    margin:
+        0 0 18px;
+}
+
+
+/* =====================================================
+   TIMELINE
+===================================================== */
+
+.tl{
+    position:relative;
+
+    padding-left:30px;
+
+    border-left:
+        2px dashed var(--gold);
+
+    margin-left:10px;
+}
+
+.ev{
+    position:relative;
+    margin-bottom:22px;
+}
+
+.ev svg{
+    position:absolute;
+
+    left:-41px;
+    top:4px;
+
+    width:18px;
+
+    background:var(--bei);
+}
+
+.ev b{
+    display:block;
+
+    font-size:1.15rem;
+
+    color:var(--rose);
+
+    font-weight:600;
+}
+
+.ev p{
+    margin:
+        2px 0 0;
+
+    font-size:1.2rem;
+    line-height:1.55;
+}
+
+
+/* =====================================================
+   WHY I LOVE YOU
+===================================================== */
+
+.why{
+    list-style:none;
+    padding:0;
+    margin:0;
+
+    display:grid;
+    gap:10px;
+
+    font-size:1.25rem;
+}
+
+.why li{
+    display:flex;
+    gap:10px;
+    align-items:flex-start;
+}
+
+.why svg{
+    width:18px;
+    flex:none;
+    margin-top:6px;
+}
+
+
+/* =====================================================
+   COUNTDOWN
+===================================================== */
+
+.cnt{
+    display:flex;
+    justify-content:center;
+
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+.cnt div{
+    background:var(--mar);
+
+    color:var(--bei);
+
+    border-radius:10px;
+
+    padding:
+        12px
+        16px;
+
+    min-width:82px;
+
+    text-align:center;
+
+    box-shadow:
+        0 6px 14px #4a0a1c55,
+        inset 0 0 0 2px #b88a4a88;
+}
+
+.cnt b{
+    display:block;
+
+    font-size:2rem;
+    line-height:1;
+}
+
+.cnt span{
+    font-style:italic;
+}
+
+.dt{
+    text-align:center;
+
+    margin:
+        0 0 16px;
+
+    font-size:1.15rem;
+}
+
+.dt input{
+    font:inherit;
+
+    background:#fffaf0;
+
+    border:
+        1px solid var(--gold);
+
+    border-radius:6px;
+
+    padding:4px 8px;
+
+    color:var(--mar);
+}
+
+
+/* =====================================================
+   OPEN WHEN
+===================================================== */
+
+.owg{
+    display:grid;
+    gap:12px;
+}
+
+.ow{
+    background:
+        linear-gradient(
+            #f8eddc,
+            #ead8ba
+        );
+
+    border:
+        1px solid var(--gold);
+
+    border-radius:8px;
+
+    overflow:hidden;
+
+    box-shadow:
+        0 5px 12px #3a0d1933;
+}
+
+.ow-e{
+    all:unset;
+
+    box-sizing:border-box;
+
+    width:100%;
+
+    cursor:pointer;
+
+    padding:
+        16px
+        16px
+        16px
+        62px;
+
+    font-size:1.3rem;
+
+    font-style:italic;
+
+    color:var(--mar);
+
+    position:relative;
+}
+
+.ow-e:before{
+    content:"♥";
+
+    position:absolute;
+
+    left:14px;
+    top:50%;
+
+    transform:
+        translateY(-50%);
+
+    width:36px;
+    height:36px;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #b52a4a,
+            #5c0c22
+        );
+
+    color:#f3e6d2;
+
+    display:grid;
+    place-items:center;
+
+    font-style:normal;
+
+    transition:
+        transform .5s;
+}
+
+.ow.on .ow-e:before{
+    transform:
+        translateY(-50%)
+        rotate(360deg)
+        scale(.8);
+}
+
+.ow-n{
+    max-height:0;
+
+    padding:0 20px;
+
+    font-size:1.25rem;
+    line-height:1.6;
+
+    transition:
+        max-height .7s,
+        padding .7s;
+}
+
+.ow.on .ow-n{
+    max-height:320px;
+
+    padding:
+        4px
+        20px
+        20px;
+}
+
+
+/* =====================================================
+   FINAL QUESTION
+===================================================== */
+
+.q{
+    text-align:center;
+
+    background:var(--mar);
+
+    color:var(--bei);
+
+    border-radius:12px;
+
+    padding:30px 18px;
+
+    min-height:220px;
+
+    position:relative;
+
+    box-shadow:
+        inset 0 0 0 3px
+        #b88a4a88;
+}
+
+.q h2{
+    color:var(--bei);
+    margin-bottom:6px;
+}
+
+.q p{
+    margin:
+        0 0 20px;
+
+    font-size:1.25rem;
+    font-style:italic;
+}
+
+.q button{
+    font:
+        600 1.2rem
+        'Cormorant Garamond',
+        serif;
+
+    border:0;
+
+    border-radius:30px;
+
+    padding:
+        10px 26px;
+
+    cursor:pointer;
+}
+
+#yes{
+    background:var(--bei);
+    color:var(--mar);
+
+    transition:
+        transform .25s;
+}
+
+#no{
+    background:#ffffff1f;
+    color:var(--bei);
+
+    position:relative;
+
+    margin-left:12px;
+
+    transition:
+        transform .25s;
+}
+
+.q .win{
+    display:none;
+
+    font-family:'Great Vibes';
+
+    font-size:2.2rem;
+    line-height:1.3;
+}
+
+.q.won .win{
+    display:block;
+}
+
+.q.won .ask{
+    display:none;
+}
+
+
+/* =====================================================
+   LETTER BACK BUTTON
+===================================================== */
+
+.back-btn{
+    display:block;
+
+    margin:
+        26px auto 0;
+
+    background:none;
+
+    border:
+        1px solid var(--bei2);
+
+    color:var(--bei);
+
+    padding:
+        10px 24px;
+
+    border-radius:30px;
+
+    font:
+        italic 1.15rem
+        'Cormorant Garamond',
+        serif;
+
+    cursor:pointer;
+}
+
+.back-btn:hover{
+    background:#ffffff14;
+}
+
+
+/* =====================================================
+   HEART BURST
+===================================================== */
+
+.bp{
+    position:fixed;
+
+    z-index:30;
+
+    pointer-events:none;
+
+    color:var(--rose);
+
+    animation:
+        bp 1.4s
+        ease-out
+        forwards;
+}
+
+@keyframes bp{
+    to{
+        transform:
+            translate(
+                var(--dx),
+                var(--dy)
+            )
+            rotate(var(--r))
+            scale(.5);
+
+        opacity:0;
+    }
+}
+
+
+/* =====================================================
+   SINGLE POLAROID SLIDESHOW
+===================================================== */
+
+#show{
+    position:fixed;
+
+    inset:0;
+
+    z-index:20;
+
+    overflow:hidden;
+
+    background:
+        radial-gradient(
+            ellipse at 50% 40%,
+            #97162b,
+            #7a0f1f 55%,
+            #4a0813
+        );
+
+    opacity:0;
+    visibility:hidden;
+
+    transition:
+        opacity 1.8s,
+        visibility 0s 1.8s;
+}
+
+#show.on{
+    opacity:1;
+    visibility:visible;
+
+    transition:
+        opacity 1.8s;
+}
+
+#show:before,
+#show:after{
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    pointer-events:none;
+
+    z-index:3;
+}
+
+#show:before{
+    background:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='.28'/%3E%3C/svg%3E");
+
+    mix-blend-mode:overlay;
+}
+
+#show:after{
+    box-shadow:
+        inset 0 0 160px #20030a;
+}
+
+
+/* =====================================================
+   MEMORY SHOW
+===================================================== */
+
+.memory-show{
+    position:absolute;
+
+    inset:0;
+
+    z-index:1;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+    justify-content:center;
+
+    gap:18px;
+
+    padding:
+        30px 16px;
+
+    text-align:center;
+}
+
+.memory-title{
+    font-family:'Great Vibes',cursive;
+
+    color:#fff;
+
+    font-size:
+        clamp(
+            2rem,
+            7vw,
+            3rem
+        );
+
+    margin:0;
+
+    text-shadow:
+        0 3px 10px #3a0610;
+
+    animation:
+        softFloat
+        3s
+        ease-in-out
+        infinite;
+}
+
+@keyframes softFloat{
+    0%,100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-5px);
+    }
+}
+
+
+/* =====================================================
+   ONE SINGLE POLAROID
+===================================================== */
+
+.single-polaroid{
+    --r:-2deg;
+
+    width:
+        min(78vw,360px);
+
+    aspect-ratio:.8;
+
+    background:
+        linear-gradient(
+            145deg,
+            #fffdf8,
+            #e8e0d3
+        );
+
+    padding:
+        6%
+        6%
+        17%;
+
+    position:relative;
+
+    border-radius:4px;
+
+    transform:
+        rotate(var(--r));
+
+    box-shadow:
+        0 30px 55px #25040b,
+        0 0 0 1px #0003,
+        inset 0 0 20px #0003;
+
+    transition:
+        transform .8s
+        cubic-bezier(.2,.8,.2,1),
+        box-shadow .8s;
+}
+
+.single-polaroid:before{
+    content:"";
+
+    position:absolute;
+
+    z-index:5;
+
+    top:-13px;
+    left:50%;
+
+    width:90px;
+    height:27px;
+
+    transform:
+        translateX(-50%)
+        rotate(-4deg);
+
+    background:#e9c9a0aa;
+
+    box-shadow:
+        0 1px 3px #0004;
+}
+
+.single-polaroid:after{
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    pointer-events:none;
+
+    z-index:4;
+
+    background:
+        linear-gradient(
+            115deg,
+            transparent 35%,
+            #fff7 50%,
+            transparent 65%
+        )
+        -150% 0/250% 100%
+        no-repeat;
+
+    transition:
+        background-position 1.2s;
+}
+
+.single-polaroid:hover{
+    transform:
+        rotate(0)
+        scale(1.03);
+
+    box-shadow:
+        0 40px 70px #25040b,
+        0 0 50px #ff4d6a66;
+}
+
+.single-polaroid:hover:after{
+    background-position:
+        150% 0;
+}
+
+
+/* =====================================================
+   MEMORY PHOTO
+===================================================== */
+
+.memory-photo{
+    width:100%;
+    height:100%;
+
+    display:block;
+
+    object-fit:cover;
+
+    background:
+        repeating-linear-gradient(
+            45deg,
+            #e4d6c0 0 9px,
+            #ecdfcb 9px 18px
+        );
+
+    transition:
+        opacity .9s ease,
+        transform 1.1s ease,
+        filter 1s ease;
+
+    cursor:default;
+}
+
+.memory-photo.fade-out{
+    opacity:0;
+
+    transform:
+        scale(1.08);
+
+    filter:
+        blur(5px);
+}
+
+.memory-photo.fade-in{
+    animation:
+        photoReveal
+        1.2s
+        ease
+        forwards;
+}
+
+@keyframes photoReveal{
+    from{
+        opacity:0;
+
+        transform:
+            scale(1.08);
+
+        filter:
+            blur(5px);
+    }
+
+    to{
+        opacity:1;
+
+        transform:
+            scale(1);
+
+        filter:
+            blur(0);
+    }
+}
+
+
+/* =====================================================
+   MEMORY CAPTION
+===================================================== */
+
+.memory-caption{
+    position:absolute;
+
+    bottom:5%;
+
+    left:0;
+    right:0;
+
+    text-align:center;
+
+    color:#6b0f2a;
+
+    font-family:
+        'Great Vibes',
+        cursive;
+
+    font-size:
+        clamp(
+            1.4rem,
+            5vw,
+            2rem
+        );
+
+    z-index:6;
+
+    text-shadow:
+        0 1px 1px #fff8;
+}
+
+.memory-counter{
+    color:#f3e6d2;
+
+    font-size:1.05rem;
+
+    font-style:italic;
+
+    opacity:.85;
+
+    letter-spacing:.08em;
+}
+
+.memory-message{
+    color:#fff;
+
+    font-family:'Great Vibes',cursive;
+
+    font-size:
+        clamp(
+            1.5rem,
+            5vw,
+            2rem
+        );
+
+    margin:0;
+
+    text-shadow:
+        0 3px 10px #3a0610;
+}
+
+
+/* =====================================================
+   FLOATING MEMORY HEARTS
+===================================================== */
+
+.memory-heart{
+    position:absolute;
+
+    color:#f3e6d2;
+
+    opacity:.7;
+
+    pointer-events:none;
+
+    animation:
+        memoryHeartFloat
+        5s
+        ease-in-out
+        infinite;
+}
+
+@keyframes memoryHeartFloat{
+    0%,100%{
+        transform:
+            translateY(0)
+            rotate(0deg);
+    }
+
+    50%{
+        transform:
+            translateY(-18px)
+            rotate(8deg);
+    }
+}
+
+
+/* =====================================================
+   SHOW CONTROLS
+===================================================== */
+
+.tools{
+    position:absolute;
+
+    z-index:10;
+
+    top:
+        calc(
+            10px +
+            env(safe-area-inset-top,0px)
+        );
+
+    right:10px;
+
+    display:flex;
+
+    gap:6px;
+
+    opacity:.35;
+
+    transition:opacity .4s;
+}
+
+.tools:hover,
+.tools:focus-within{
+    opacity:1;
+}
+
+.tools button{
+    font:
+        italic 1rem
+        'Cormorant Garamond',
+        serif;
+
+    color:#f1e8da;
+
+    background:#2a050c66;
+
+    border:
+        1px solid #f1e8da66;
+
+    border-radius:20px;
+
+    padding:
+        3px 12px;
+
+    cursor:pointer;
+}
+
+.tools button:hover{
+    background:#f1e8da;
+    color:var(--mar);
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width:500px){
+
+    .single-polaroid{
+        width:78vw;
+    }
+
+    .memory-title{
+        font-size:2rem;
+    }
+
+    .memory-message{
+        font-size:1.5rem;
+    }
+
+}
+
+@media(prefers-reduced-motion:reduce){
+
+    *{
+        transition-duration:.01s!important;
+        animation:none!important;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     SVG SYMBOLS
+===================================================== -->
+
+<svg
+    width="0"
+    height="0"
+    style="position:absolute"
+>
+
+<defs>
+
+<symbol
+    id="heart"
+    viewBox="0 0 24 22"
+>
+
+<path
+    d="M12 21C-4 9 3-2 12 5c9-7 16 4 0 16z"
+    fill="currentColor"
+/>
+
+</symbol>
+
+
+<symbol
+    id="bow"
+    viewBox="0 0 120 80"
+>
+
+<path
+    d="M60 40C40 8 6 4 6 28s34 22 54 12z"
+    fill="#7d1632"
+/>
+
+<path
+    d="M60 40C80 8 114 4 114 28s-34 22-54 12z"
+    fill="#7d1632"
+/>
+
+<path
+    d="M60 40C42 18 22 14 18 26"
+    fill="none"
+    stroke="#c25a74"
+    stroke-width="3"
+    stroke-linecap="round"
+    opacity=".7"
+/>
+
+<path
+    d="M60 40C78 18 98 14 102 26"
+    fill="none"
+    stroke="#c25a74"
+    stroke-width="3"
+    stroke-linecap="round"
+    opacity=".7"
+/>
+
+<path
+    d="M54 46L34 76l16-6 6 8 8-30z"
+    fill="#5c0c22"
+/>
+
+<path
+    d="M66 46l20 30-16-6-6 8-8-30z"
+    fill="#6b0f2a"
+/>
+
+<rect
+    x="49"
+    y="28"
+    width="22"
+    height="22"
+    rx="8"
+    fill="#8f1a39"
+/>
+
+</symbol>
+
+
+<symbol
+    id="rose"
+    viewBox="-20 -20 40 40"
+>
+
+<circle
+    r="18"
+    fill="#7d1632"
+/>
+
+<circle
+    r="13"
+    fill="#9a1d3f"
+/>
+
+</symbol>
+
+</defs>
+</svg>
+
+
+<!-- =====================================================
+     ENVELOPE
+===================================================== -->
+
+<div
+    class="scene"
+    id="scene"
+>
+
+<div
+    class="env"
+    id="env"
+    role="button"
+    tabindex="0"
+    aria-label="Open the envelope"
+>
+
+<div class="back"></div>
+
+<div class="card">
+    For you,<br>
+    my love
+</div>
+
+<div class="front">
+    <i class="l"></i>
+    <i class="r"></i>
+    <i class="b"></i>
+</div>
+
+<div class="flap">
+    <i></i>
+    <i></i>
+</div>
+
+
+<!-- Wax seal -->
+
+<svg
+    class="seal"
+    viewBox="0 0 100 100"
+>
+
+<defs>
+
+<radialGradient
+    id="wx"
+    cx=".35"
+    cy=".3"
+>
+
+<stop
+    offset="0"
+    stop-color="#b52a4a"
+/>
+
+<stop
+    offset=".7"
+    stop-color="#7d1632"
+/>
+
+<stop
+    offset="1"
+    stop-color="#4a0a1c"
+/>
+
+</radialGradient>
+
+</defs>
+
+<path
+    d="M50 3c9 0 11 8 19 9s14 6 12 15 5 13 3 22-8 11-9 19-10 14-19 14-12 7-20 5-11-9-17-14-13-9-12-18-5-13-1-21 7-12 9-19 12-9 20-10z"
+    fill="url(#wx)"
+/>
+
+<circle
+    cx="50"
+    cy="50"
+    r="30"
+    fill="none"
+    stroke="#c25a74"
+    stroke-width="2"
+    opacity=".5"
+/>
+
+<use
+    href="#heart"
+    x="32"
+    y="33"
+    width="36"
+    height="33"
+    color="#d86a86"
+/>
+
+</svg>
+
+
+<!-- Stamp -->
+
+<svg
+    class="stamp"
+    viewBox="0 0 80 96"
+>
+
+<rect
+    width="80"
+    height="96"
+    fill="#fffaf0"
+/>
+
+<rect
+    x="7"
+    y="7"
+    width="66"
+    height="82"
+    fill="#6b0f2a"
+/>
+
+<rect
+    x="9"
+    y="9"
+    width="62"
+    height="78"
+    fill="none"
+    stroke="#e6d2b5"
+    stroke-width=".8"
+/>
+
+<use
+    href="#rose"
+    x="14"
+    y="20"
+    width="52"
+    height="52"
+/>
+
+<text
+    x="40"
+    y="78"
+    text-anchor="middle"
+    font-family="Cormorant Garamond,serif"
+    font-size="8"
+    font-weight="600"
+    fill="#f3e6d2"
+>
+LOVE POST
+</text>
+
+</svg>
+
+
+<!-- Postmark -->
+
+<svg
+    class="pm"
+    viewBox="0 0 120 60"
+    fill="none"
+    stroke="#4a0a1c"
+    stroke-width="1.6"
+>
+
+<circle
+    cx="30"
+    cy="30"
+    r="24"
+/>
+
+<circle
+    cx="30"
+    cy="30"
+    r="19"
+    stroke-width=".8"
+/>
+
+<text
+    x="30"
+    y="28"
+    text-anchor="middle"
+    font-size="9"
+    fill="#4a0a1c"
+    stroke="none"
+    font-family="Cormorant Garamond,serif"
+    font-weight="600"
+>
+BOYFRIEND
+</text>
+
+</svg>
+
+
+<div class="addr">
+    To my favourite<br>
+    person ♥
+</div>
+
+
+<svg
+    class="ebow"
+    viewBox="0 0 120 80"
+>
+
+<use href="#bow"/>
+
+</svg>
+
+</div>
+
+
+<div
+    class="hint"
+    id="hint"
+>
+tap the envelope to open
+</div>
+
+</div>
+
+
+<!-- =====================================================
+     MEMORY SHOW
+===================================================== -->
+
+<div id="show">
+
+<div class="tools">
+
+<button id="tm">
+    ♪
+</button>
+
+<button id="tk">
+    skip
+</button>
+
+</div>
+
+
+<div class="memory-show">
+
+<p class="memory-title">
+    Happy Boyfriend's Day ♡
+</p>
+
+
+<!-- ONE SINGLE POLAROID -->
+
+<div class="single-polaroid">
+
+<img
+    id="memoryPhoto"
+    class="memory-photo"
+    src="photo1.jfif"
+    alt="Our beautiful memory"
+/>
+
+<div
+    id="memoryCaption"
+    class="memory-caption"
+>
+    our first memory ♡
+</div>
+
+</div>
+
+
+<div
+    id="memoryCounter"
+    class="memory-counter"
+>
+    1 / 9
+</div>
+
+
+<p class="memory-message">
+    every picture holds a little piece of us ♡
+</p>
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
+     LETTER
+===================================================== -->
+
+<div id="letter">
+
+<div class="paper">
+
+
+<svg
+    class="tbow"
+    viewBox="0 0 120 80"
+>
+
+<use href="#bow"/>
+
+</svg>
+
+
+<h1
+    contenteditable
+    spellcheck="false"
+>
+Happy Boyfriend's Day
+</h1>
+
+
+<p
+    class="sub"
+    contenteditable
+    spellcheck="false"
+>
+to the one who feels like home
+</p>
+
+
+<p
+    class="msg"
+    contenteditable
+    spellcheck="false"
+>
+Write your heart out here. Tell him what he means to you, the little things you adore, and how he makes every ordinary day feel a little more magical. (Click any text on this page to edit it.)
+</p>
+
+
+<div class="sep">
+    <svg>
+        <use href="#heart"/>
+    </svg>
+</div>
+
+
+<h2>
+    Our beautiful memories
+</h2>
+
+<p
+    class="msg"
+    contenteditable
+    spellcheck="false"
+>
+Every picture above holds a little piece of our story. ♡
+</p>
+
+
+<div class="sep">
+    <svg>
+        <use href="#heart"/>
+    </svg>
+</div>
+
+
+<h2>
+    Moments I treasure
+</h2>
+
+
+<div class="tl">
+
+<div class="ev">
+
+<svg style="color:#a3243f">
+    <use href="#heart"/>
+</svg>
+
+<b
+    contenteditable
+    spellcheck="false"
+>
+The day we met
+</b>
+
+<p
+    contenteditable
+    spellcheck="false"
+>
+Describe the moment you knew he was special.
+</p>
+
+</div>
+
+
+<div class="ev">
+
+<svg style="color:#a3243f">
+    <use href="#heart"/>
+</svg>
+
+<b
+    contenteditable
+    spellcheck="false"
+>
+Our first adventure
+</b>
+
+<p
+    contenteditable
+    spellcheck="false"
+>
+The place, the laughter, the little details you remember.
+</p>
+
+</div>
+
+
+<div class="ev">
+
+<svg style="color:#a3243f">
+    <use href="#heart"/>
+</svg>
+
+<b
+    contenteditable
+    spellcheck="false"
+>
+A moment I'll never forget
+</b>
+
+<p
+    contenteditable
+    spellcheck="false"
+>
+Write the memory that still makes you smile.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="sep">
+    <svg>
+        <use href="#heart"/>
+    </svg>
+</div>
+
+
+<h2>
+    Why I love you
+</h2>
+
+
+<ul class="why">
+
+<li>
+
+<svg style="color:#a3243f">
+    <use href="#heart"/>
+</svg>
+
+<span
+    contenteditable
+    spellcheck="false"
+>
+The way you laugh at your own jokes
+</span>
+
+</li>
+
+
+<li>
+
+<svg style="color:#a3243f">
+    <use href="#heart"/>
+</svg>
+
+<span
+    contenteditable
+    spellcheck="false"
+>
+How safe I feel beside you
+</span>
+
+</li>
+
+
+<li>
+
+<svg style="color:#a3243f">
+    <use href="#heart"/>
+</svg>
+
+<span
+    contenteditable
+    spellcheck="false"
+>
+Add your own reason here
+</span>
+
+</li>
+
+</ul>
+
+
+<div class="sep">
+    <svg>
+        <use href="#heart"/>
+    </svg>
+</div>
+
+
+<h2>
+    Time we've been in love
+</h2>
+
+
+<p class="dt">
+
+Together since
+
+<input
+    type="date"
+    id="since"
+    value="2024-02-14"
+>
+
+</p>
+
+
+<div class="cnt">
+
+<div>
+    <b id="cd">0</b>
+    <span>days</span>
+</div>
+
+<div>
+    <b id="ch">0</b>
+    <span>hours</span>
+</div>
+
+<div>
+    <b id="cm">0</b>
+    <span>minutes</span>
+</div>
+
+<div>
+    <b id="cs">0</b>
+    <span>seconds</span>
+</div>
+
+</div>
+
+
+<div class="sep">
+    <svg>
+        <use href="#heart"/>
+    </svg>
+</div>
+
+
+<h2>
+    Open when…
+</h2>
+
+
+<div class="owg">
+
+<div class="ow">
+
+<button
+    class="ow-e"
+    type="button"
+>
+Open when you miss me
+</button>
+
+<div
+    class="ow-n"
+    contenteditable
+    spellcheck="false"
+>
+Close your eyes. I'm right there with you. Write a sweet, comforting note here.
+</div>
+
+</div>
+
+
+<div class="ow">
+
+<button
+    class="ow-e"
+    type="button"
+>
+Open when you had a rough day
+</button>
+
+<div
+    class="ow-n"
+    contenteditable
+    spellcheck="false"
+>
+You are stronger than today. Tell him how proud you are of him.
+</div>
+
+</div>
+
+
+<div class="ow">
+
+<button
+    class="ow-e"
+    type="button"
+>
+Open when you want to smile
+</button>
+
+<div
+    class="ow-n"
+    contenteditable
+    spellcheck="false"
+>
+Write your funniest inside joke here, the one only you two understand.
+</div>
+
+</div>
+
+</div>
+
+
+<div class="sep">
+    <svg>
+        <use href="#heart"/>
+    </svg>
+</div>
+
+
+<!-- FINAL QUESTION -->
+
+<div
+    class="q"
+    id="q"
+>
+
+<div class="ask">
+
+<h2>
+    One last question…
+</h2>
+
+<p>
+    Will you be my boyfriend forever?
+</p>
+
+<button id="yes">
+    Yes, always
+</button>
+
+<button id="no">
+    No
+</button>
+
+</div>
+
+
+<div
+    class="win"
+    contenteditable
+    spellcheck="false"
+>
+I knew it. Forever starts today, and every day after. I love you.
+</div>
+
+</div>
+
+
+<div class="sign"
+     contenteditable
+     spellcheck="false">
+
+Forever yours, ♥
+
+</div>
+
+
+<button
+    class="back-btn"
+    id="close"
+>
+Fold the letter back
+</button>
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script>
+
+
+/* =====================================================
+   ELEMENTS
+===================================================== */
+
+const env =
+    document.getElementById('env');
+
+const L =
+    document.getElementById('letter');
+
+const hint =
+    document.getElementById('hint');
+
+
+/* =====================================================
+   FLOATING HEARTS
+===================================================== */
+
+setInterval(() => {
+
+    const h =
+        document.createElement('div');
+
+    h.className = 'fl';
+
+    h.textContent = '♥';
+
+    h.style.left =
+        Math.random() * 100 + 'vw';
+
+    h.style.fontSize =
+        12 + Math.random() * 28 + 'px';
+
+    h.style.animationDuration =
+        9 + Math.random() * 9 + 's';
+
+    document.body.appendChild(h);
+
+    setTimeout(
+        () => h.remove(),
+        18500
+    );
+
+},900);
+
+
+/* =====================================================
+   OPEN ENVELOPE
+===================================================== */
+
+function openEnvelope(){
+
+    if(
+        env.classList.contains('open')
+    ){
+        return;
+    }
+
+    env.classList.add('open');
+
+    hint.style.opacity = 0;
+
+    setTimeout(() => {
+
+        env.classList.add('gone');
+
+    },2100);
+
+    setTimeout(() => {
+
+        startShow();
+
+    },2500);
+
+    try{
+        playM();
+    }
+    catch(error){
+        console.log(error);
+    }
+
+}
+
+
+env.addEventListener(
+    'click',
+    openEnvelope
+);
+
+
+env.addEventListener(
+    'keydown',
+    e => {
+
+        if(
+            e.key === 'Enter' ||
+            e.key === ' '
+        ){
+
+            e.preventDefault();
+
+            openEnvelope();
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   CLOSE LETTER
+===================================================== */
+
+document
+.getElementById('close')
+.onclick = () => {
+
+    L.classList.remove('show');
+
+    setTimeout(() => {
+
+        env.classList.remove('gone');
+
+        setTimeout(() => {
+
+            env.classList.remove('open');
+
+            hint.style.opacity = 1;
+
+        },500);
+
+    },700);
+
+};
+
+
+/* =====================================================
+   HEART BURST
+===================================================== */
+
+function burst(x,y,n){
+
+    for(
+        let i=0;
+        i<n;
+        i++
+    ){
+
+        const h =
+            document.createElement('div');
+
+        h.className = 'bp';
+
+        h.textContent =
+            Math.random() > .3
+            ? '♥'
+            : '✿';
+
+        const a =
+            Math.random() *
+            Math.PI *
+            2;
+
+        const d =
+            60 +
+            Math.random() * 160;
+
+        h.style.cssText +=
+            `left:${x}px;
+             top:${y}px;
+             font-size:${12+Math.random()*20}px;
+             --dx:${Math.cos(a)*d}px;
+             --dy:${Math.sin(a)*d-60}px;
+             --r:${Math.random()*360}deg`;
+
+        document.body.appendChild(h);
+
+        setTimeout(
+            () => h.remove(),
+            1500
+        );
+
+    }
+
+}
+
+
+env.addEventListener(
+    'click',
+    () => {
+
+        setTimeout(
+            () =>
+                burst(
+                    innerWidth/2,
+                    innerHeight/2,
+                    40
+                ),
+            900
+        );
+
+    }
+);
+
+
+L.addEventListener(
+    'click',
+    e => {
+
+        if(
+            !e.target.closest(
+                '[contenteditable],button,input'
+            )
+        ){
+
+            burst(
+                e.clientX,
+                e.clientY,
+                7
+            );
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   LOVE COUNTER
+===================================================== */
+
+const S =
+    document.getElementById('since');
+
+
+function tick(){
+
+    const t =
+        Math.max(
+            0,
+            Date.now() -
+            new Date(
+                S.value ||
+                Date.now()
+            ).getTime()
+        );
+
+
+    const f =
+        (id,value) => {
+
+            document.getElementById(id)
+                .textContent =
+                value.toLocaleString();
+
+        };
+
+
+    f(
+        'cd',
+        Math.floor(t / 864e5)
+    );
+
+    f(
+        'ch',
+        Math.floor(t / 36e5)
+    );
+
+    f(
+        'cm',
+        Math.floor(t / 6e4)
+    );
+
+    f(
+        'cs',
+        Math.floor(t / 1e3)
+    );
+
+}
+
+
+setInterval(
+    tick,
+    1000
+);
+
+tick();
+
+
+S.addEventListener(
+    'change',
+    tick
+);
+
+
+/* =====================================================
+   OPEN WHEN
+===================================================== */
+
+document
+.querySelectorAll('.ow-e')
+.forEach(button => {
+
+    button.addEventListener(
+        'click',
+        () => {
+
+            const box =
+                button.parentNode;
+
+            box.classList.toggle('on');
+
+            if(
+                box.classList.contains('on')
+            ){
+
+                const r =
+                    button.getBoundingClientRect();
+
+                burst(
+                    r.left + 32,
+                    r.top + 24,
+                    8
+                );
+
+            }
+
+        }
+    );
+
+});
+
+
+/* =====================================================
+   FINAL QUESTION
+===================================================== */
+
+const yes =
+    document.getElementById('yes');
+
+const no =
+    document.getElementById('no');
+
+const Q =
+    document.getElementById('q');
+
+let n = 0;
+
+
+function dodge(){
+
+    n++;
+
+    yes.style.transform =
+        `scale(${1+n*.18})`;
+
+    no.style.transform =
+        `translate(
+            ${(Math.random()-.5)*120}px,
+            ${(Math.random()-.5)*70}px
+        )`;
+
+    if(n > 6){
+
+        no.textContent =
+            'ok fine… yes';
+
+    }
+
+    if(n > 7){
+
+        no.onclick =
+            () => yes.click();
+
+    }
+
+}
+
+
+no.addEventListener(
+    'mouseenter',
+    dodge
+);
+
+no.addEventListener(
+    'click',
+    dodge
+);
+
+
+yes.addEventListener(
+    'click',
+    () => {
+
+        Q.classList.add('won');
+
+        const r =
+            Q.getBoundingClientRect();
+
+        [0,300,600].forEach(
+            delay => {
+
+                setTimeout(
+                    () => {
+
+                        burst(
+                            r.left +
+                            r.width/2,
+
+                            r.top +
+                            r.height/2,
+
+                            45
+                        );
+
+                    },
+                    delay
+                );
+
+            }
+        );
+
+    }
+);
+
+
+/* =====================================================
+   SINGLE POLAROID MEMORY SYSTEM
+===================================================== */
+
+const SH =
+    document.getElementById('show');
+
+const memoryPhoto =
+    document.getElementById(
+        'memoryPhoto'
+    );
+
+const memoryCaption =
+    document.getElementById(
+        'memoryCaption'
+    );
+
+const memoryCounter =
+    document.getElementById(
+        'memoryCounter'
+    );
+
+
+/*
+    EXACTLY 9 LOCAL PHOTOS
+    Keep these files in the same
+    folder as index.html.
+*/
+
+const memories = [
+
+    {
+        image:"photo1.jfif",
+        caption:"Kangalodu iru manamum inaindhu ♡"
+    },
+
+    {
+        image:"photo2.jfif",
+        caption:"Nam kaigalai ondraai korthu kondu ♡"
+    },
+
+    {
+        image:"photo3.jfif",
+        caption:"Iru kannangalai otrikondu ♡"
+    },
+
+    {
+        image:"photo4.jfif",
+        caption:"Iru kannangalai otrikondu ♡"
+    },
+    {
+        image:"photo8.jfif",
+        caption:"Iru kannangalai otrikondu ♡"
+    },
+
+    {
+        image:"photo5.jfif",
+        caption:"En vayitril un kaiyum, Nee enn manadhilum ♡"
+    },
+
+    {
+        image:"photo6.jfif",
+        caption:"Ondraaga kaadhalin thunayil nadandhum ♡"
+    },
+
+    {
+        image:"photo7.jfif",
+        caption:"Nam Thozhgalil saayndhum...♡"
+    },
+
+    
+
+    {
+        image:"photo9.jfif",
+        caption:"Neeyum Naanum vaazhvom vaa vaazhvin irudhivarai... ♥"
+    }
+
+];
+
+
+let currentMemory = 0;
+
+let memoryTimer = null;
+
+
+/* =====================================================
+   SHOW MEMORY
+===================================================== */
+
+function showMemory(index){
+
+    currentMemory = index;
+
+    const memory =
+        memories[index];
+
+
+    memoryPhoto.classList.remove(
+        'fade-in'
+    );
+
+    memoryPhoto.classList.add(
+        'fade-out'
+    );
+
+
+    setTimeout(() => {
+
+        memoryPhoto.src =
+            memory.image;
+
+        memoryCaption.textContent =
+            memory.caption;
+
+        memoryCounter.textContent =
+            `${index + 1} / ${memories.length}`;
+
+
+        memoryPhoto.classList.remove(
+            'fade-out'
+        );
+
+        memoryPhoto.classList.add(
+            'fade-in'
+        );
+
+    },700);
+
+}
+
+
+/* =====================================================
+   NEXT MEMORY
+===================================================== */
+
+function nextMemory(){
+
+    const next =
+        (currentMemory + 1)
+        % memories.length;
+
+    showMemory(next);
+
+    clearTimeout(
+        memoryTimer
+    );
+
+    memoryTimer =
+        setTimeout(
+            nextMemory,
+            5000
+        );
+
+}
+
+
+/* =====================================================
+   START MEMORY SHOW
+===================================================== */
+
+function startShow(){
+
+    SH.classList.add('on');
+
+    currentMemory = 0;
+
+    showMemory(0);
+
+    clearTimeout(
+        memoryTimer
+    );
+
+    memoryTimer =
+        setTimeout(
+            nextMemory,
+            5000
+        );
+
+
+    for(
+        let i=0;
+        i<15;
+        i++
+    ){
+
+        setTimeout(
+            createMemoryHeart,
+            i*300
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   END MEMORY SHOW
+===================================================== */
+
+function endShow(){
+
+    clearTimeout(
+        memoryTimer
+    );
+
+    SH.classList.remove(
+        'on'
+    );
+
+    setTimeout(() => {
+
+        currentMemory = 0;
+
+        memoryPhoto.src =
+            "photo1.jfif";
+
+        memoryCaption.textContent =
+            memories[0].caption;
+
+        memoryCounter.textContent =
+            "1 / 9";
+
+        L.classList.add(
+            'show'
+        );
+
+        L.scrollTop = 0;
+
+    },1200);
+
+}
+
+
+/* =====================================================
+   FLOATING MEMORY HEART
+===================================================== */
+
+function createMemoryHeart(){
+
+    const heart =
+        document.createElement('div');
+
+    heart.className =
+        'memory-heart';
+
+    heart.textContent =
+        Math.random() > .3
+        ? '♥'
+        : '♡';
+
+
+    heart.style.left =
+        Math.random()*90 + 5 + '%';
+
+    heart.style.top =
+        Math.random()*80 + 10 + '%';
+
+    heart.style.fontSize =
+        14 +
+        Math.random()*20 +
+        'px';
+
+    heart.style.animationDelay =
+        Math.random()*2 +
+        's';
+
+
+    SH.appendChild(
+        heart
+    );
+
+
+    setTimeout(
+        () => heart.remove(),
+        6000
+    );
+
+}
+
+
+/* =====================================================
+   SKIP
+===================================================== */
+
+document
+.getElementById('tk')
+.onclick =
+    endShow;
+
+
+/* =====================================================
+   MUSIC
+===================================================== */
+
+let ac = null;
+
+let syn = null;
+
+let musicOn = false;
+
+
+function note(frequency){
+
+    if(!ac){
+        return;
+    }
+
+    const oscillator =
+        ac.createOscillator();
+
+    const gain =
+        ac.createGain();
+
+    const time =
+        ac.currentTime;
+
+
+    oscillator.type =
+        'triangle';
+
+    oscillator.frequency.value =
+        frequency;
+
+
+    gain.gain.setValueAtTime(
+        .0001,
+        time
+    );
+
+    gain.gain.exponentialRampToValueAtTime(
+        .07,
+        time + .05
+    );
+
+    gain.gain.exponentialRampToValueAtTime(
+        .0001,
+        time + 2.4
+    );
+
+
+    oscillator.connect(gain);
+
+    gain.connect(
+        ac.destination
+    );
+
+
+    oscillator.start();
+
+    oscillator.stop(
+        time + 2.5
+    );
+
+}
+
+
+function playM(){
+
+    musicOn = true;
+
+
+    document
+        .getElementById('tm')
+        .style.opacity = 1;
+
+
+    ac =
+        ac ||
+        new AudioContext();
+
+
+    ac.resume();
+
+
+    let s = 0;
+
+
+    const chords = [
+
+        [261.6,329.6,392],
+
+        [220,261.6,329.6],
+
+        [174.6,220,261.6],
+
+        [196,246.9,392]
+
+    ];
+
+
+    clearInterval(
+        syn
+    );
+
+
+    syn =
+        setInterval(
+            () => {
+
+                const chord =
+                    chords[
+                        Math.floor(
+                            s/6
+                        ) % 4
+                    ];
+
+                note(
+                    chord[
+                        s%3
+                    ] *
+                    (
+                        s%6 > 2
+                        ? 2
+                        : 1
+                    )
+                );
+
+                s++;
+
+            },
+            620
+        );
+
+}
+
+
+function stopM(){
+
+    musicOn = false;
+
+
+    document
+        .getElementById('tm')
+        .style.opacity = .5;
+
+
+    clearInterval(
+        syn
+    );
+
+    syn = null;
+
+}
+
+
+document
+.getElementById('tm')
+.onclick = () => {
+
+    musicOn
+        ? stopM()
+        : playM();
+
+};
+
+</script>
+
+</body>
+</html>
