@@ -8,7 +8,6 @@
 <title>For My Favourite Person</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Shadows+Into+Light&display=swap" rel="stylesheet">
-<audio id="music" src="song.mp3" loop autoplay></audio>
 <style>
 
 :root{
@@ -1516,6 +1515,7 @@ h2{
 
 <body>
 
+<audio id="music" src="song.mp3" loop ></audio>
 
 <!-- =====================================================
      SVG SYMBOLS
@@ -2277,7 +2277,7 @@ En sandhosham epomey sandhoshama irukanum adhu dhaan avanuku azhageyyy andha kan
     contenteditable
     spellcheck="false"
 >
-I knew it. Forever starts today, and every day after. I love you.
+Ahn adhuu...No ndra oru option eh illa dii unaku enta nee maatikta odavum mudiyadhu oliyavum mudiyadhu
 </div>
 
 </div>
@@ -2385,13 +2385,7 @@ function openEnvelope(){
 
     },2500);
 
-    try{
-        playM();
-    }
-    catch(error){
-        console.log(error);
-    }
-
+    document.getElementById("music").play();
 }
 
 
@@ -3026,173 +3020,6 @@ document
 .onclick =
     endShow;
 
-
-/* =====================================================
-   MUSIC
-===================================================== */
-
-let ac = null;
-
-let syn = null;
-
-let musicOn = false;
-
-
-function note(frequency){
-
-    if(!ac){
-        return;
-    }
-
-    const oscillator =
-        ac.createOscillator();
-
-    const gain =
-        ac.createGain();
-
-    const time =
-        ac.currentTime;
-
-
-    oscillator.type =
-        'triangle';
-
-    oscillator.frequency.value =
-        frequency;
-
-
-    gain.gain.setValueAtTime(
-        .0001,
-        time
-    );
-
-    gain.gain.exponentialRampToValueAtTime(
-        .07,
-        time + .05
-    );
-
-    gain.gain.exponentialRampToValueAtTime(
-        .0001,
-        time + 2.4
-    );
-
-
-    oscillator.connect(gain);
-
-    gain.connect(
-        ac.destination
-    );
-
-
-    oscillator.start();
-
-    oscillator.stop(
-        time + 2.5
-    );
-
-}
-
-
-function playM(){
-
-    musicOn = true;
-
-
-    document
-        .getElementById('tm')
-        .style.opacity = 1;
-
-
-    ac =
-        ac ||
-        new AudioContext();
-
-
-    ac.resume();
-
-
-    let s = 0;
-
-
-    const chords = [
-
-        [261.6,329.6,392],
-
-        [220,261.6,329.6],
-
-        [174.6,220,261.6],
-
-        [196,246.9,392]
-
-    ];
-
-
-    clearInterval(
-        syn
-    );
-
-
-    syn =
-        setInterval(
-            () => {
-
-                const chord =
-                    chords[
-                        Math.floor(
-                            s/6
-                        ) % 4
-                    ];
-
-                note(
-                    chord[
-                        s%3
-                    ] *
-                    (
-                        s%6 > 2
-                        ? 2
-                        : 1
-                    )
-                );
-
-                s++;
-
-            },
-            620
-        );
-
-}
-
-
-function stopM(){
-
-    musicOn = false;
-
-
-    document
-        .getElementById('tm')
-        .style.opacity = .5;
-
-
-    clearInterval(
-        syn
-    );
-
-    syn = null;
-
-}
-
-
-document
-.getElementById('tm')
-.onclick = () => {
-
-    musicOn
-        ? stopM()
-        : playM();
-
-};
-
 </script>
-
 </body>
 </html>
